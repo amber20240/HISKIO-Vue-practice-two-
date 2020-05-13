@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    .colorBlue {
+      color: blue
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>v-bind:屬性＝"名稱" 縮寫/ v-on:動作＝"function名稱" 縮寫</h1>
+    <h2>(一)v-bind:屬性＝"名稱" 縮寫</h2>
+    <h3>1.v-bind:class="名稱" 縮寫</h3>
+    <p>沒有用v-bind:class="名稱"</p>
+    <p :class="colorP">有用v-bind:class="名稱"</p>
+    <h3>2.v-bind:checked="名稱" 縮寫</h3>
+    <input type="checkbox" :checked="select">
+    <label for="checkbox1">{{counter}}</label>
+    <h2>(二)v-on:動作＝"function動作"</h2>
+    <p>點擊按鈕會讓上面的checkbox的數字+1</p>
+    <button @click="add1">+1</button>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        colorP: "colorBlue",
+        select: true,
+        counter: 0,
+      },
+      methods:{
+        add1(){
+          this.counter+=1  
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
