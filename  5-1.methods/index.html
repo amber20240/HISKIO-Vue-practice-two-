@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js" integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>practice methods</h2>
+    <!-- 1個counter  -->
+    <p>點擊按鈕就加1 : {{counter1}}</p>
+    <button v-on:click="add1">＋1</button>
+    <!-- 2個counter  -->
+    <p>點擊按鈕就加按鈕裡面的數字 ： {{counter2}}</p>
+    <button v-on:click="add2">+{{counter3}}</button>
+  </div>
+<script>
+  const vm = new Vue({
+    el:"#app",
+    data:{
+      counter1:0,
+      counter2:1,
+      counter3:1,
+    },
+    methods:{
+      add1(){
+        this.counter1 +=1;
+      },
+      add2(){
+        // counter1
+        this.counter2 +=this.counter3;
+        this.counter3 +=1;
+      },
+    }
+    })
+  </script>
+</body>
+</html>
