@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <style>
+    .color_blue {
+      color: blue;
+    }
+  </style>
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- computed 不用都把屬性寫在data裡面  function名稱 = 要的結果名稱（也就等於對應到html要得到結果的位置的名稱,ex v-model="名稱"  v-mode="名稱"）computed 的格式有一般的 和 get / set -->
+  <!-- 計算兩個以上的數字  不用都設定到data裡 一般的格式(要return) . get(要return) set(不用return因為是設定val)  -->
+  <div id="app">
+    <input type="text" v-model="a">
+    +
+    <input type="text" v-model="b">
+    =
+    <input type="text" v-model="c">
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        a: 0,
+        b: 0,
+      },
+      computed: {
+        c: {
+          get() {
+            return parseInt(this.a, 10) + parseInt(this.b, 10);
+          },
+          set(val) {
+            this.b = parseInt(val, 10) - parseInt(this.a, 10);
+          },
+          set(val) {
+            this.a = parseInt(val, 10) - parseInt(this.b, 10);
+          },
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

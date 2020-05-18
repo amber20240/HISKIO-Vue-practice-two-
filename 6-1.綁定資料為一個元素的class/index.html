@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    .class_border {
+      border: 2px solid blue;
+    }
+
+    .class_bgcolor {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="a">
+    <button v-bind:class="feature">submit</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        a: "",
+      },
+      computed: {
+        feature() {
+          return {
+            class_border: true,
+            class_bgcolor: this.a !== "",
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
+<!-- 目標
+    html 一個input 一個button
+    style 兩種款式 一種input文字數量>1 color:blue  一種input文字數量=0 color:pink
+    Vue 沒有互動effect 用input文字數量判斷來回傳綁定到元素上
+    computed 要用return 不用都放在data 
+    computed 的 function有 三種寫法 字串 object array  
+    object特別 寫法：
+    a(){
+      return {
+        class_border: true,
+        class_color: true
+      }
+    }
+    透過計算綁定class到元素上 -->

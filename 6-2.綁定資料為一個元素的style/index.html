@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 目標：用button控制文字大小,變小
+       html: <p>文字</p>  <button></button>
+       css : font-size
+       vue : 透過點擊button（v-on） 來改變p大小(v-bind)  
+       備註 ：可以寫出style格式（如範例）
+  -->
+  <div id="app">
+    <h2>透過點擊改變文字打小</h2>
+    <p style="font-size: 20px">示範style的html寫法</p>
+    <p :style="sizeP">透過按下按鈕,讓文字變小</p>
+    <button @click="shrink">-12px</button>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:"#app",
+      data:{
+        size: 100,
+      },
+      methods:{
+        shrink(){
+          this.size -=12;
+        }
+      },
+      computed:{
+        sizeP(){
+          return `fontSize:${this.size}px`
+        }
+      } 
+      }
+    )
+  </script>
+</body>
+</html>

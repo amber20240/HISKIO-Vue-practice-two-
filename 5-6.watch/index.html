@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js" integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- watch 不用return 少用 -->
+  <!-- 測試密碼強度 ;正規法 ; 改成password-->
+  <div id="app">
+  <input type="text" v-model="a">
+  +
+  <input type="text" v-model="b">
+  =
+  <input type="text" v-model="c">
+  </div>
+  <div id="app2">
+    <input type="text" v-model="e">
+    <p>content:{{e}}</p>
+    <p>constent:{{f}}</p>
+  </div>
+  <script>
+    const vm2= new Vue({
+      el:"#app2",
+      data:{
+        f: false 
+      },
+      computed:{
+        // e輸入的內容有沒有大於一個文字
+        e:{
+          set(val){
+            if(val == ""){
+              console.log("good")
+            }
+          }
+        }
+      }
+    })
+      const vm = new Vue({
+        el:"#app",
+        data:{
+          a:0,
+          b:0,
+          c:0
+        },
+        watch:{
+          b(val){
+            this.c = parseInt(this.a,10)+parseInt(val,10);
+          },
+          a(val){
+            this.c = parseInt(this.b,10)+parseInt(val,10);
+          }
+        }
+      })
+  </script>
+</body>
+</html>
