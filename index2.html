@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul>
+      <li v-for="num in numbers">{{num}}</li>
+    </ul>
+    <button @click="f">k</button>
+    <ul>
+      <li v-for="item in newNumbers">{{item}}</li>
+    </ul>
+  </div>
+    <script>
+      const vm = new Vue({
+        el:"#app",
+        data:{
+          numbers:[1,2,3,4,5,6,7,8],
+          newNumbers:"",
+        },
+        methods:{
+          f(){
+            this.newNumbers = this.numbers.filter(
+              numbers => numbers>0
+            )
+          }
+        }
+      })
+    </script>
+</body>
+</html>

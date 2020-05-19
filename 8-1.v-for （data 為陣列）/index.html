@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 目標做出: 要渲染的data為Vue實例data內的值為陣列 v-for -->
+    <ul>
+      <li v-for="(item,index) in todos">{{index+1}} - {{ item }}</li>
+    </ul>
+    <ul>
+      <li v-for="month in months">{{month}}</li>
+    </ul>
+    <ul>
+      <li v-for="num in 25">{{num}}</li>
+    </ul>
+    <select>
+      <option v-for="month in months">{{month}}</option>
+    </select>
+    <select>
+      <option v-for="num in 25">{{num}}</option>
+    </select> 
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        todos: [
+          "html",
+          "css",
+          "JS",
+          "Vue",
+        ],
+        months: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+      }
+    })
+  </script>
+</body>
+
+</html>
