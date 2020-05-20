@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 陣列 . 物件要注意的事項 -->
+  <div id="app">
+    <!-- 從最後一個數字增加數字到data內 -->
+    <h2>點擊下方按鈕,practice push .pop . shift . unshift. splice .sort</h2>
+    <button @click="addNum">從最後一個數字增加一個數字</button>
+    <button @click="popNum">從最後一個數字減少一個數字</button>
+    <button @click="shiftNum">在第一個數字前增加一個數字</button>
+    <button @click="unshiftNum">在第一個數字前增加一個數字</button>
+    <button @click="spliceNum">刪除第五個數字,在後面增加數字12345</button>
+    <button @click="sortNum">整理重新排序</button>
+    <button @click="reverseNum">反轉排序</button>
+    <button @click="sliceNum">反轉排序</button>
+    <button @click="spliceNum1">刪除陣列裡的所所有數字</button>
+
+    <ul>
+      <li v-for="item in items">{{item}}</li>
+    </ul>
+  </div>
+  <div id="app2">
+    <p>陣列.物件要注意不要使用會修改到陣列.物件的值的方法如下</p>
+    <ul>
+      <li>this.陣列[12] =25 ,可改用splice(從第幾個開始刪除,刪除幾個,新增的value,新增的value....)</li>
+      <li>this.陣列.length =0 不會讓陣列的值為空,可以用this.陣列＝""</li>
+    </ul>
+    <p>統整vue 的陣列.物件 新增值 修改值 刪除</p>
+    <p>1.陣列新增值</p>
+    <button @click="add1">點擊新增陣列值</button>
+    <ul>
+      <li v-for="num in nums">{{num}}</li>
+    </ul>
+    <p>2.物件新增值</p>
+    <button @click="add2">點擊新增物件屬性 和 值</button>
+    <ul>
+      <li v-for="(value,key) in numbers">{{key}} - {{value}}</li>
+    </ul>
+    <p>3.陣列修改值(不能用this.nums[0]=5,也不能用this.nums.length=0來刪除陣列內的值)</p>
+    <button @click="add3">點擊修改陣列值</button>
+    <button @click="add4">點擊刪除陣列內的值</button>
+    <ul>
+      <li v-for="num in nums">{{num}}</li>
+    </ul>
+    <p>4.物件修改值</p>
+    <button @click="add5">點擊修改物件內的值,ps</button>
+    <ul>
+        <li v-for="number in numbers">{{number}}</li>
+      </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        items: { a: "y" },
+      },
+      methods: {
+        addNum() {
+          this.items.push(this.items.length + 1);
+        },
+        popNum() {
+          this.items.pop();
+        },
+        shiftNum() {
+          this.items.shift();
+        },
+        unshiftNum() {
+          this.items.unshift(5);
+        },
+        spliceNum() {
+          // splice（從第幾個開始刪除,刪除幾個,增加哪些數字,增加哪些數字）
+          this.items.splice(4, 1, 1, 2, 3, 4, 5)
+        },
+        sortNum() {
+          // 只能整理重新排續,不能回上一步
+          this.items.sort()
+        },
+        reverseNum() {
+          this.items.reverse()
+        },
+        sliceNum() {
+          this.items.slice(1, 2, 5)
+        },
+        spliceNum1() {
+          // splice(只給一個數表示從這個數開始到最後一個數字會都刪除)
+          this.items.splice(0)
+        },
+      }
+    });
+    const vm2 = new Vue({
+      el:"#app2",
+      data:{
+        nums:[1,2,3,4,5,6,7,8],
+        numbers:{
+          name:"amber",
+          id:12345
+        }
+      },
+      methods:{
+        add1(){
+          this.nums.push(5)
+          },
+          add2(){
+        // Vue.set(物件,屬性,value)
+        Vue.set(this.numbers,"title","good")
+      },
+      add3(){
+        // splice(從第幾個開始刪除,刪除幾個,新增什麼值,新增什麼值)
+        this.nums.splice(2,1,5)
+      },add4(){
+        this.nums.splice(0)
+      },add5(){
+        this.numbers.name = "good";
+      }
+      },
+      
+    })
+    // 統整JS 陣列  . 物件 的新增.修改.刪除 (在下面)
+    // 統整Vue 陣列  . 物件 的新增.修改.刪除 （在上面 const vm2）
+    // 
+
+
+    // 陣列 新增
+    const wow = [1, 2, 3];
+    wow.push(1);
+    console.log(wow);
+    // 物件 新增
+    const good = {
+      name: "amber",
+      id: 12345
+    };
+    good.dogs = 25;
+    console.log(good);
+
+    // 陣列＋物件 新增
+    const wowo = [
+      {
+        name: "good",
+        id: 12345
+      }, {
+        name: "wowo",
+        id: 12345
+      }
+    ];
+    const too = {
+      name: "hoho",
+      id: 12345
+    };
+    wowo.push(too);
+    console.log(wowo);
+    wowo[0].title = "gooder";
+    console.log(wowo);
+
+    // 修改 陣列
+    const power = [1, 2, 3, 4, 5];
+    power[0] = 5;
+    console.log(power);
+    // 修改 物件
+    const power2 = {
+      name: "good",
+      id: 12345
+    };
+    power2.name = "goodgood";
+    console.log(power2);
+    // 修改 陣列+物件
+    const powerpower = [
+      {
+        name: "good",
+        id: 12345
+      }, {
+        name: "wowo",
+        id: 12345
+      }
+    ];
+    powerpower[0].name = "goodgood";
+    console.log(powerpower);
+  </script>
+</body>
+
+</html>
