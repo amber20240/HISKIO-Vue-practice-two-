@@ -24,7 +24,6 @@
     <button @click="reverseNum">反轉排序</button>
     <button @click="sliceNum">反轉排序</button>
     <button @click="spliceNum1">刪除陣列裡的所所有數字</button>
-
     <ul>
       <li v-for="item in items">{{item}}</li>
     </ul>
@@ -57,6 +56,11 @@
     <ul>
         <li v-for="number in numbers">{{number}}</li>
       </ul>
+    <p>5.使用filter過濾出來為偶數的值</p>
+    <button @click="filter2">偶數（可以被％2整除的</button>
+    <ul>
+      <li v-for="num in nums">{{num}}</li>
+    </ul>
   </div>
   <script>
     const vm = new Vue({
@@ -107,33 +111,23 @@
         }
       },
       methods:{
-        add1(){
-          this.nums.push(5)
-          },
-          add2(){
-        // Vue.set(物件,屬性,value)
-        Vue.set(this.numbers,"title","good")
+        filter2(){
+          this.nums = this.nums.filter(function(nums){
+            return nums%2 ===0
+          })
+        }
       },
-      add3(){
-        // splice(從第幾個開始刪除,刪除幾個,新增什麼值,新增什麼值)
-        this.nums.splice(2,1,5)
-      },add4(){
-        this.nums.splice(0)
-      },add5(){
-        this.numbers.name = "good";
-      }
-      },
-      
     })
     // 統整JS 陣列  . 物件 的新增.修改.刪除 (在下面)
     // 統整Vue 陣列  . 物件 的新增.修改.刪除 （在上面 const vm2）
     // 
 
-
+    // JS 
     // 陣列 新增
     const wow = [1, 2, 3];
     wow.push(1);
     console.log(wow);
+    
     // 物件 新增
     const good = {
       name: "amber",
@@ -186,5 +180,3 @@
     console.log(powerpower);
   </script>
 </body>
-
-</html>
