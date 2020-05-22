@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- counter的兩種方法 -->
+    <h1>counter第一種方法</h1>
+    <p>{{counter1}}</p>
+    <button @click="count1">counter</button>
+    <h1>counter第二種方法</h1>
+     <p>{{counter2}}</p>
+     <button @click="counter2 +=1">counter</button>
+  </div>
+  <script>
+  const vm = new Vue({
+    el:"#app",
+    data:{
+      counter1:0,
+      counter2:0
+    },
+    methods:{
+      count1(){
+        this.counter1 +=1
+      }
+    }
+  })
+  </script>
+</body>
+</html>

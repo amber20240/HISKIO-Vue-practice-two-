@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <style>
+    button{
+      width: 200px;
+      height: 50px;}
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>1.mouseover +1</h1>
+    <p>{{counter1}}</p>
+    <button @mouseover="addMouseover">mouseover +1</button>
+    <h1>2.mouseover +1 / mouseout -1</h1>
+    <p>{{counter2}}</p>
+    <button @mouseover="addMouseover2" @mouseout="reduceMouseout">mouseover +1 / mouseout -1</button>
+    <h1>3.mousedown +1 /mouseup -1</h1>
+    <p>{{counter3}}</p>
+    <button @mousedown="addMousedown" @mouseup="reduceMouseup">mousedown +1 /mouseup -1</button>
+    <h1>4.mouseover就加1</h1>
+    <p>{{counter4}}</p>
+    <button @mousemove="addMouseMove">mousemove +1</button>
+  </div>
+  <script>
+  const vm =new Vue({
+    el:"#app",
+    data:{
+      counter1:0,
+      counter2:0,
+      counter3:0,
+      counter4:0,
+    },
+    methods:{
+      addMouseover(){
+        this.counter1 += 1;
+      },
+      addMouseover2(){
+        this.counter2 += 1;
+      },
+      reduceMouseout(){
+        this.counter2 -= 1;
+      },
+      addMousedown(){
+        this.counter3 += 1;
+      },
+      reduceMouseup(){
+        this.counter3 -=1
+      },
+      addMouseMove(){
+        this.counter4 +=1
+      }
+    }
+  })
+  </script>
+</body>
+</html>
