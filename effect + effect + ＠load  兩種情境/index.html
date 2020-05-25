@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <style>
+    .img.hidden{
+      opacity:0
+    }
+    .img{
+      transition: opacity 5s;
+    }
+    .colorBlue{
+      color:blue;
+      font-size: 30px;
+    }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- effect + ＠load  兩種情境 
+      1.
+      一種是未完成
+        跑出 loading 字樣
+        img 沒跑出來
+      一種是完成
+        跑出 complete 字樣
+        img跑出來
+      2.加上轉場效果
+      一種是未完成
+        跑出 loading 字樣
+        img 沒跑出來
+        轉場  transition  先透明
+      一種是完成
+        跑出 complete 字樣
+        img 跑出來
+        轉場  transition 五秒到原本的圖
+      轉場的技巧
+      舊的img 先設定效果 如 旋轉  180度 從透明變不透明
+      -->
+      <!-- 
+        字樣 
+          需要有兩種  loading complete  用v-if來顯示來判斷
+        圖 
+          會loading 需要用＠load來偵聽 ＠load表示 onload   
+      -->
+      <h2>文字＋img</h2>
+      <p v-if="loadImg == true">complete</p>
+      <p v-else>loading</p>
+      <img src="https://loremflickr.com/320/240" alt="logo" @load="load">
+      <h2>文字＋img＋轉場效果</h2>
+      <!-- 
+        字樣 
+          需要有兩種  loading complete  用v-if來顯示來判斷
+        圖 
+          會loading 需要用＠load來偵聽 ＠load表示 onload   
+        轉場
+          舊的圖要變新的圖
+          舊圖做效果
+          opacity 0
+          新圖回復原本的樣子
+          transition 五秒回復  
+       -->
+       <p v-if="loadImg2 == true" :class="pStyle">complete</p>
+       <p v-else>loading</p>
+       <img src="https://loremflickr.com/320/240" alt="logo" @load="load2" :class="imgStyle">
+    </div>
+  <script>
+    const vm = new Vue({
+      el:"#app",
+      data:{
+        loadImg: false,
+        loadImg2: false,
+      },
+      methods:{
+        load(){
+          this.loadImg = true;
+        },
+        load2(){
+          this.loadImg2 = true;
+        }
+      },
+      computed:{
+        imgStyle(){
+          if(this.loadImg2 == false){
+            return "img hidden" 
+          }else{
+            return "img"
+          }
+        },
+        pStyle(){
+          return "colorBlue"
+        }
+      }
+    })
+</script>
+</body>
+</html>

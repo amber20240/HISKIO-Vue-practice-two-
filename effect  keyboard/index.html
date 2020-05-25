@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 
+      keyboard effect  
+      keydown 知道keycode(e.keycode  (e是effect)) 
+      keydown.enter
+     -->
+     <!-- 點擊ａ連結到keyCode -->
+     <h2>在input輸入字母或按下鍵盤任意鍵得到keycode</h2>
+     <input type="text" @keydown="keyCodeNumber">
+     <p>keyCode數字：{{c}}</p>
+     <h2>keydown 呈現input的文字</h2>
+     <input type="text" v-model="text1" @keydown="list">
+     <button @click="list">submit</button>
+     <ul>
+       <li v-for="item in newList">{{item}}</li>
+     </ul>
+     <h2>keydown.enter  修飾符</h2>
+     <p> 輸入文字後按enter</p>
+    <input type="text" @keydown.enter="keydownEnter" v-model="text2">
+    <ul>
+      <li v-for="item in newList2">{{item}}</li>
+    </ul>
+    <h2>keydown.enter  修飾符 + prevent</h2>
+    <p> 輸入文字後按鍵盤的a</p>
+    <input type="text" @keydown.a.prevent="keydownA1" v-model="text3">
+    <ul>
+      <li v-for="item in newList3">{{item}}</li>
+    </ul>
+  </div>
+  <script>
+  const vm = new Vue({
+    el:"#app",
+    data:{
+      newList:[],
+      text1:"",
+      b:"",
+      c:"",
+      d:"",
+      text2:"",
+      newList2:[],
+      text3:"",
+      newList3:[],
+    },
+    methods:{
+      keyCodeNumber(e){
+        this.b = e.keyCode;
+      },
+      list(e){
+        if(this.text1 == ""){
+          return
+        };
+        if(e.keyCode == 13){
+          this.newList.push(this.text1);
+          this.text1 = "";
+        };
+      },
+      keyCodeNumber(e){
+        this.c = e.keyCode;
+      },
+      keydownEnter(){
+        if(this.text2 ==""){return};
+        this.newList2.push(this.text2);
+        this.text2="";
+      },
+      keydownA1(){
+        if(this.text3 == ""){
+          return
+        };
+        this.newList3.push(this.text3);
+        this.text3="";
+      }
+    }
+  })
+</script>
+</body>
+</html>
