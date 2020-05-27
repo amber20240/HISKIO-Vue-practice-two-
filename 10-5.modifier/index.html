@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-model 的 modifier  -->
+    <!-- v-model.laze="fucntion名稱"   v-model.number  v-model.trim  -->
+    <h2>輸入input 內容,滑鼠移開後才執行</h2>
+    <input type="text" v-model.lazy="a">
+    <p>文字：{{a}}</p>
+    <h2>輸入input 的內容變成number</h2>
+    <input type="text" v-model.number="b" @input="c=typeof(b)">
+    <p>輸入的內容：{{b}}</p>
+    <p>輸入的內容轉型別：{{c}}</p>
+    <h2>輸入文字,多空格會刪掉</h2>
+    <input type="text" v-model.trim="d">
+    <p>輸入文字有扣除空格：{{d}}</p>
+  </div>
+  <script>
+    const vm = new Vue({
+      el:"#app",
+      data:{
+        a:"",
+        b:"",
+        c:"",
+        d:"",
+      },
+    })
+  </script>
+</body>
+</html>

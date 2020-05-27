@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>有設定value</h1>
+    <select name="year1" id="year1" v-model="year1">
+      <option value="" disabled >year</option>
+      <option value="2015">2015</option>
+      <option value="2016">2016</option>
+      <option value="2017">2017</option>
+      <option value="2018">2018</option>
+    </select>
+    <p>year:{{year1}}</p>
+    <h1>沒有設定value</h1>
+    <select name="year2" id="year2" v-model="year2">
+      <option disabled value="">select year</option>
+      <option>2015</option>
+      <option>2016</option>
+      <option>2017</option>
+      <option>2018</option>
+    </select>
+    <p>year:{{year2}}</p>
+    <h1>select + multiple</h1>
+    <select name="year3" id="year3" multiple v-model="year3">
+      <option value="" disabled>select year</option>
+      <option>2015</option>
+      <option>2016</option>
+      <option>2017</option>
+      <option>2018</option>
+    </select>
+    <p>year:{{year3}}</p>
+    <h1>用一行 option呈現 ,要呈現value</h1>
+    <select name="year4" id="year4" v-model="a">
+      <option value="" disabled>select year</option>
+      <option v-for="item in years1" :value="item">{{item}}</option>
+    </select>
+    <p>year:{{a}}</p>
+    <h1>用number來呈現</h1>
+    <select name="year5" id="year5" v-model="b">
+      <option value="" disabled>select month</option>
+      <option v-for="item in 12" :value="item">{{item}}</option>
+    </select>
+    <p>select:{{b}}</p>
+    <h1>如果data為陣列＋物件</h1>
+    <select name="year5" id="year5" v-model="c">
+      <option value="" disabled>select sex</option>
+      <option v-for="item in years4" :value="item.value">{{item.text}}</option>
+    </select>
+     <p>select:{{c}}</p>
+  </div>
+  <script>
+    const vm= new Vue({
+      el:"#app",
+      data:{
+        year1:"",
+        year2:"",
+        year3:"",
+        years1:[2015,2016,2017,2018],
+        a:"",
+        b:"",
+        c:"",
+        years4:[
+          {
+            value:1,
+            text:"women"
+          },{
+            value:2,
+            text:"men",
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+</html>
