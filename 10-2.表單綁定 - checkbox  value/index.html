@@ -1,59 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
-  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+    integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
   <style>
-  ul{
-    padding: 0;
-  }
-  ul li{
-    display: inline-block;
-    padding: 10px;
-  }
+    ul {
+      padding: 0;
+    }
+
+    ul li {
+      display: inline-block;
+      padding: 10px;
+    }
   </style>
   <title>Document</title>
 </head>
+
 <body>
   <div id="app">
     <!-- 做註冊登入要看過文章,勾選  agree 後才可以,跳轉倒下一頁面 submit  btn -->
     <!-- 統整重點： 文章  一個勾選 一個btn submit -->
     <!-- v-model是綁定值 -->
-    <p>checkbox agree  跳轉分頁</p>
+    <p>checkbox agree 跳轉分頁</p>
     <input type="checkbox" v-model="a">
     <p>是否勾選：{{a}}</p>
     <button @click="submit1">submit在此分頁開啟</button>
     <button @click="submit2">submit在另一分頁開啟</button>
-    <p>checkbox 三種按鈕 , 呈現複選結果</p>
-    <input type="checkbox" value="eat" v-model="good">eat
-    <input type="checkbox" value="drink" v-model="good">drink
-    <input type="checkbox" value="cake" v-model="good">cake
-    <ul>想要：
-      <li v-for="item in good">{{item}}</li>
-    </ul>
   </div>
   <script>
     const vm = new Vue({
-      el:"#app",
-      data:{
-        a:false,
-        good:[]
+      el: "#app",
+      data: {
+        a: false,
+        good: []
       },
-      methods:{
-        submit1(e){
-          if(this.a == false){
+      methods: {
+        submit1(e) {
+          if (this.a == false) {
             alert("please agree")
-          }else{
-            window.location.href="./index2.html"
+          } else {
+            window.location.href = "./index2.html"
           }
         },
-        submit2(e){
-          if(this.a == false){
+        submit2(e) {
+          if (this.a == false) {
             alert("please agree")
-          }else{
+          } else {
             window.open("./index2.html")
           }
         }
@@ -61,4 +57,5 @@
     })
   </script>
 </body>
+
 </html>
