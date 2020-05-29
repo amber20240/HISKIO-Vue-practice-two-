@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <!-- Vue component  放在兩個div內 -->
+  <!-- Vue component  概念 
+  一個網頁會有大組件 ,而大組件由小組件們組成,
+  每個組件的data都是獨立,
+  但可以透過外層 傳向 內層  （使用props綁定）（是即時的當外層data有改變就會傳向有綁定的內層,每個小組件的data都是獨立計算的）  
+  內層 傳向 外層 （當＠（偵聽到內層有event,才會觸發）使用emit發射,不是即時的）
+  Vue 組件的data 要用 函式呈現             要做比較Vue組件的data 和  Vue實例的data
+  -->
+  <div>
+    <h1>Vue component 的 概念</h1>
+  <div id="app">
+    <!-- 要做component放在div內 -->
+    <my-component></my-component>
+    <my-component></my-component>
+  </div>
+  <div id="app2">
+    <my-component></my-component>
+    <my-component></my-component>
+  </div>
+</div>
+  <!-- global的 component -->
+  <script>
+    Vue.component("my-component",{
+      // ``裡面才可以放換行的html tag
+      // ""裡面放的是string,所以不能放換行的 html 的 tag
+      // html裡面只能放kebab case
+      // Vue裡面放 camel case / kebab case 都可以
+      // Vue component 的name因為會放在html,所以在Vue裡面但只能放kebab case
+      template:
+      `
+      <h2>good</h2>
+      <h2>good</h2>
+      `
+    })
+    const vm = new Vue({
+      el:"#app",
+    })
+    const vm2 = new Vue({
+      el:"#app2"
+    })
+  </script>
+</body>
+</html>

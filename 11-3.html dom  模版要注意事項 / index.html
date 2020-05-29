@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+  integrity="sha256-ngFW3UnAN0Tnm76mDuu7uUtYEcG3G5H1+zioJw3t+68=" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 在不同瀏覽器解析html方式不同,所以html 的 tag 有些 不能拆開來做不同component,有些可以拆開, 這邊比較 chorm 和其他 browser-->
+    <!-- 比較不同 html tag(select - option  / ul-li / table-tr-td )
+    select - option 
+    chorm ： 不能把 select - option 拆開來寫 
+    其他 ： 不能把 select - option 拆開來寫
+    
+    ul - li
+    chorm ： 可以把 ul li 拆開來寫
+    其他 ： 不可以把 ul li 拆開來寫
+
+    table - th -tr -td   // 備註:table 表格（th / tr /td）   form 表單（checkbox / radio / teatarea / select ）
+    chorm ： 可以把table的 tr / td 拆開來寫
+    其他 ： 不可以把 table的  tr / td 拆開來寫
+     -->
+     <h1>Vue component data vs Vue實例 data</h1>
+     <h2>Vue component 的 data 因為是各自獨立運作,所以data是用函式</h2>
+     <my-counter></my-counter>
+     <h2>Vue 實例 的 data是用物件呈現</h2>
+     <p>{{b}}</p>
+     <button @click="add2">+1</button>
+     <h1>Vue component 合體</h1>
+     <h2>ul li todolist</h2>
+     <my-todolist></my-todolist>
+  </div>
+
+  <script>
+    Vue.component("my-counter",{
+      data(){
+        return {
+          a:5
+        }
+      },
+      methods:{
+        add(){
+          this.a+=5
+        }
+      },
+      template:
+      `
+      <section>
+      <p>{{a}}</p><button @click="add">+5</button>
+      </section>
+       `
+    });
+    Vue.component("todolist-input",{
+      data(){
+        return{
+          a:"",
+        }
+      },
+      methods:{
+        todo(){
+          this.$emit("input",this.a);
+          this.a="";
+        }
+      },
+      template:
+      `
+      <div @keydown="todo">
+        <input type="text" v-model="a">  
+        <button>submit</button>
+      </div>
+      `
+    });
+    Vue.component("todolist-li",{
+      props:["good"],
+      template:
+      `
+      <div>
+        <li>{{good}}</li>
+      </div>
+      `
+    })
+    Vue.component("todolist-ul",{
+      data(){
+        return{
+          items:["a","b"]
+        }
+      },
+      methods:{
+        add12(a){
+          this.items.push(a)
+        }
+      },
+      template:
+      `
+      <div>
+        <todolist-input @input="add12"></todolist-input>  
+        <ul>
+          <todolist-li v-for="item in items" :good="item"></todolist-li>
+        </ul>
+      </div>
+      `
+    })
+    Vue.component("my-todolist",{
+      template:
+      `
+      <div>
+        <todolist-ul></todolist-ul>
+      </div>
+      `
+  });
+  const vm = new Vue({
+      el:"#app",
+      data:{
+        b:5,
+      },
+      methods:{
+        add2(){
+          this.b+=1
+        }
+      }
+    })
+  </script>
+</body>
+</html>
