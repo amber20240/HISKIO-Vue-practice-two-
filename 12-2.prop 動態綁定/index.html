@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>1.沒有動態綁定prop / 有動態綁定prop</h2>
+    <p>1-1.沒有動態綁定prop</p>
+    <my-component1 message="text1"></my-component1>
+    <p>2-1.有動態綁定prop</p>
+    <my-component2 :message="text2"></my-component2>
+    <h2>2.動態綁定Vue實例的data(data內屬性是array)</h2>
+    <my-component3 v-for="post in posts" :newpost="post"></my-component3>
+    <h2>3.動態綁地Vue實例data（data內的屬性是array+object）</h2>
+    <my-li v-for="item in items" :author="item.author" :post="item.post"></my-li>
+    <h2>4.動態綁定Vue實例data - 使用v-bind綁定全部data內容 (data內的屬性是array + object)</h2>
+    <my-post v-for="item in items2" v-bind="item"></my-post>
+    <h2>5.動態綁定數字</h2>
+    <p>5-1.沒有綁定數字,會是字串</p>
+    <my-number1 item="1"></my-number1>
+    <p>5-2.有綁定數字,所以會是數字</p>
+    <my-number2 :number="numberData"></my-number2>
+  </div>
+  <script>
+    // 1-1
+    Vue.component("my-component1",{
+      props:["message"],
+      template:
+      `
+      <div>
+        <p>{{message}}</p>  
+      </div>
+      `
+    })
+    // 1-2
+    Vue.component("my-component2",{
+      props:["message"],
+      template:
+      `
+      <div>
+        <p>{{message}}</p>
+      </div>
+      `
+    })
+    // 2
+    Vue.component("my-component3",{
+      props:["newpost"],
+      template:
+      `
+      <div>
+        <p>{{newpost}}</p>
+      </div>
+      `
+    });
+    // 3
+    Vue.component("my-li",{
+      props:["author","post"],
+      template:
+      `
+      <div>
+      <ul>
+        <li>{{author}} - {{post}} </li>
+      </ul>
+      </div>
+      `
+    }),
+    // 4
+    Vue.component("my-post",{
+      props:["author","post"],
+      template:
+      `
+      <ul>
+        <li>{{author}} - {{post}}</li>
+      </ul>
+      `
+    });
+    // 5
+    Vue.component("my-number1",{
+      props:["item"],
+      template:
+       `
+       <div>
+       <p>{{item+1}}</p>
+      </div>
+       `
+    }),
+    Vue.component("my-number2",{
+      props:["number"],
+      template:
+      `
+      <div>
+      <p>{{number+1}}</p>
+      </div>
+      `
+    })
+  const vm =new Vue({
+    el:"#app",  
+    data:{
+      text2:"hello world",
+      posts:["good1","good2"],
+      items:[
+        {
+          author:"good1",
+          post: "todo1",
+        },{
+          author:"good2",
+          post:"todo2",
+        }
+      ],
+      items2:[
+        {
+          author:"good1",
+          post: "todo1",
+        },{
+          author:"good2",
+          post:"todo2",
+        }
+      ],
+      numberData: 5
+    }
+  })  
+  </script>
+</body>
+</html>

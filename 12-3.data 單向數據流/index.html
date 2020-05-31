@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+  <!-- data單項數據流, 外層的data如果有修改, 就會即時單項向內層傳遞,內層的data 有修改是不能及時傳遞給外層的,需要透過this.$emit("event name","參數","參數"...) -->
+  <h2>做兩個count ,一個count在外層,一個count在內層</h2>
+  <p>改內層值的情況：因為外層有綁定外層的data內變數的值,而內層有使用prop接收外層綁定的變數,所以一開始的內層的第一個數字會是外層的data內的變數值,而內層的click event 觸發後開始＋1就只會在內層改變內層的數字,因為內層不會即時得傳值給外層,如果要傳值給外層是要使用this.$emit</p>
+  <p>在內層值已經跟最一開始的值不一樣的時候,此時改外層的值,會讓內層的值也變成跟外層的值一樣:因為內外層有互相綁定,則外層的data改變會即時的把值傳遞給內層,所以內層的值也會跟著改變</p>
+  <p>內層的值還是用外層的data值,所以外層有改變,內層也會一起改變,因為prop是即時的,傳進來的值會先暫存在prop</p>
+  <p>{{count}}</p>
+  <!-- @event="methods 內的function內的content" -->
+  <button @click="add">+1</button>
+  <my-count :count2="count"></my-count>
+  <h2>做兩個count ,一個count在外層,一個count在內層,只希望內層的count在最一開始的植根外層一樣,外層修改不會影響到內層 </h2>
+  <p>因為內層的component有另外的data,所以只有使用外層最一開始傳進來的第一個值呈現於browser,第二次開始的值就會使用內層裡面的data</p>
+  <p>{{count3}}</p>
+  <button @click="add2">+5</button>
+  <my-counter :count4="count3"></my-counter>
+  <h2>做兩個count ,一個外層的count（外面的count是1倍的）,一個室內層的count(內層的count是2倍)</h2>
+  <p>{{count5}}</p>
+  <button @click="count5+=1">+1</button>
+  <my-dbcount :dbcount="count5"></my-dbcount>
+</div>
+  <script>
+  Vue.component("my-count",{
+    props:["count2"],
+    template:
+    `
+    <div>
+    <p>{{count2}}</p>
+    <button @click="count2+=1">+1</button>
+    </div>
+    `
+  });
+  Vue.component("my-counter",{
+    props:["count4"],
+    data(){
+      return {
+        newCount: this.count4,
+      }
+    },
+    template:
+    `
+    <div>
+    <p>{{newCount}}</p>
+    <button @click="newCount+=5">+5</button>
+    </div>
+    `
+  });
+  Vue.component("my-dbcount",{
+    props:["dbcount"],
+    computed:{
+      dbcount5(){
+        return this.dbcount *2;
+      }
+    },
+    template:
+    `
+    <div>
+      <p>{{dbcount5}}</p>
+    </div>
+    `
+  })
+  const vm = new Vue({
+    el:"#app",
+    data:{
+      count:0,
+      count3:20,
+      count5:0,
+    },
+    methods:{
+      add(){
+        this.count+=1;
+      },
+      add2(){
+        this.count3+=5
+      }
+    }
+  })
+  </script>
+</body>
+</html>

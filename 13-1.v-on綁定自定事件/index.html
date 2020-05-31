@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>做一個emit 觸發 alert</h2>
+    <my-alert @alert2="counter5"></my-alert>
+    <h2>做兩個button,一個button是要做counter 計算（內層）,一個button是要做this.emit（外層）</h2>
+    <p>發射後的數值：{{count4}}</p>
+    <my-count :count1="count2" @emit1="addemit2"></my-count>
+  </div>
+  <script>
+    Vue.component("my-alert",{
+      methods:{
+        alert1(){
+          this.$emit("alert2",250)
+        }
+      },
+      template:
+      `
+      <div>
+        <button @click="alert1">alert</button>  
+      </div>
+      `
+    })
+    Vue.component("my-count",{
+      props:["count1"],
+      data(){
+        return {
+          count3 : this.count1
+        }
+      },
+      methods:{
+        addemit(){
+          this.$emit("emit1",this.count3)
+        }
+      },
+      template:
+      `
+      <div>
+        <p>{{count3}}</p>  
+        <button @click="count3+=5">+5</button>
+        <button @click="addemit">emit</button>
+        </div>
+      `
+    })
+  const vm =new Vue({
+    el:"#app",
+    data:{
+      count2:0,
+      count4:0,
+    },
+    methods:{
+      counter5(x){
+        alert(`${x}`)
+      },
+      addemit2(count3){
+        this.count4 = count3;
+      }
+    }
+  })
+  </script>
+</body>
+</html>

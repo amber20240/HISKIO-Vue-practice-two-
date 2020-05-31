@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>1-1.外層沒有用綁定變數,所以會是字串（可以直接看code會比較好懂</h2>
+    <!--  1-1題的：這一層是外層 -->
+    <my-component message="good"></my-component>
+    <h2>1-2.外層有綁定變數,所以會呈現外層內data的變數</h2>
+    <!--  1-2題的：這一層是外層,這邊是使用Vue 組件（component） -->
+     <!-- Vue組件  Vue實例  的data 的格式很像, 但不同 -->
+    <my-component2 :message="text1"></my-component2>
+  </div>
+  <script>
+    // 1-1題的：這一層是內層
+    Vue.component("my-component",{
+      props:["message"],
+      template:
+      `
+      <div>
+      <p>{{message}}</p>
+      </div>
+      `
+    });
+    // 1-2題的：這一層是內層
+    Vue.component("my-component2",{
+      props:["message"],
+      template:
+      `
+      <div>
+        <p>{{message}}</p>  
+      </div>
+      `
+    })
+    const vm = new Vue({
+      el:"#app",
+      data:{
+        text1:"todo"
+      }
+    }) 
+  </script>
+</body>
+</html>

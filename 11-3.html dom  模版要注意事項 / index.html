@@ -31,7 +31,7 @@
      <p>{{b}}</p>
      <button @click="add2">+1</button>
      <h1>Vue component 合體</h1>
-     <h2>ul li todolist</h2>
+     <h2>todolist</h2>
      <my-todolist></my-todolist>
   </div>
 
@@ -68,7 +68,8 @@
       },
       template:
       `
-      <div @keydown="todo">
+      <div @keydown  
+      =  "todo">
         <input type="text" v-model="a">  
         <button>submit</button>
       </div>
