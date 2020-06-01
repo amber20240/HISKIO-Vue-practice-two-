@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 本單元要練習,<component :is="data的某個屬性"></component> -->
+    <h2>製作兩個按扭,分別處理兩個不同的component（component分別為lesson / textarea）</h2>
+    <button @click="content=`lesson`">lesson</button>
+    <button @click="content=`apply`">apply</button>
+    <component :is="content"></component>
+  </div>
+  <script>
+    Vue.component("lesson",{
+      template:
+      `
+      <div>
+      <ul>
+        <li>10:00-11:00 good</li>
+        <li>11:00-12:00 good2</li>
+      </ul>
+      </div>
+      `
+    });
+    Vue.component("apply",{
+      template:
+      `
+      <div>
+      <textarea name="t1" id="t1" cols="30" rows="10" style="margin-top: 25px"></textarea>
+      <button style="display:block">submit</button>
+      </div>
+      `
+    })
+    const vm = new Vue({
+      el: "#app",
+      data:{
+        content:"lesson",
+      }
+    })
+  </script>
+</body>
+
+</html>

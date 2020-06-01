@@ -14,6 +14,9 @@
     <h2>做兩個button,一個button是要做counter 計算（內層）,一個button是要做this.emit（外層）</h2>
     <p>發射後的數值：{{count4}}</p>
     <my-count :count1="count2" @emit1="addemit2"></my-count>
+    <!-- 外層是發射後的數字 內層是做點擊計算-->
+    <p>發射後的計算：{{w}}</p>
+    <my-counter2 :a="b" :emit6.sync="w"></my-counter2>
   </div>
   <script>
     Vue.component("my-alert",{
@@ -26,6 +29,22 @@
       `
       <div>
         <button @click="alert1">alert</button>  
+      </div>
+      `
+    });
+    Vue.component("my-counter2",{
+      props:["a"],
+      methods:{
+        emit5(){
+          this.$emit("emit6",this.a)
+        }
+      },
+      template:
+      `
+      <div>
+      <p>內層的值：{{a}}</p>
+        <button @click="a+=5">+5</button>
+        <button @click="emit5">emit</button>
       </div>
       `
     })
@@ -55,6 +74,8 @@
     data:{
       count2:0,
       count4:0,
+      b:0,
+      w:0,
     },
     methods:{
       counter5(x){
@@ -62,6 +83,9 @@
       },
       addemit2(count3){
         this.count4 = count3;
+      },
+      emit6(a){
+        this.w = a;
       }
     }
   })

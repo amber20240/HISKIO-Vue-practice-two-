@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+  <h2>使用.native 綁定原生event</h2>
+  <p>也就是在外層使用.native綁定,內層如果有button或其他,則外層可以接收到內層的event(如click event),觸發外層的event</p>
+  <p>{{a}}</p>
+  <my-counter @click.native="add"></my-counter>
+  <h2>沒有使用native,則透過把值往外傳</h2>
+  <p>{{c}}</p>
+  <my-counter2 @emit2="emit3"></my-counter2>
+  </div>
+  <script>
+  Vue.component("my-counter",{
+    template:
+    `
+    <div>
+    <button>+10</button>
+    </div>
+    `
+  });
+  Vue.component("my-counter2",{
+    data(){
+      return{
+        b:0
+      }
+    },
+    methods:{
+      add(){
+        this.b +=10
+      },
+      emit1(){
+        this.$emit("emit2",this.b)
+      }
+    },
+      template:
+      `
+      <div>
+      <p>{{b}}</p>
+      <button @click="add" @click="emit1">+10</button>
+      </div>
+      `
+    });
+  const vm =new Vue({
+    el:"#app",
+    data:{
+      a:0,
+      c:0,
+    },
+    methods:{
+      add(){
+        this.a+=10
+      },
+      emit3(b){
+        this.c=b
+      }
+    }
+    });
+  </script>
+</body>
+</html>

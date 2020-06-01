@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <!-- keep-alive 保存狀態,很常用在後台的不同頁面切換-->
+    <!-- 使用textarea 保留空白的空間 -->
+    <!-- 使用component :is="content" -->
+    <h2>做出兩個button,一個button 是lesson ,一個button 是apply</h2>
+    <button @click="content=`lesson`">lesson</button>
+    <button @click="content=`apply`">apply</button>
+    <keep-alive>
+      <component :is="content"></component>
+    </keep-alive>
+  </div>
+  <script>
+    Vue.component("lesson-ul", {
+      props: ["time", "course"],
+      template:
+        `
+      <div>
+        <li style="margin:25px 0px;">{{time}} - {{course}}</li>
+      </div>
+      `
+    })
+    Vue.component("lesson", {
+      data() {
+        return {
+          lessons: [
+            {
+              time: "10:00-11:00",
+              course: "good1"
+            }, {
+              time: "11:00-12:00",
+              course: "good2"
+            }
+          ]
+        }
+      },
+      template:
+        `
+      <div>
+        <lesson-ul v-for="item in lessons" v-bind="item"><lesson-ul>
+      </div>
+      `
+    });
+    Vue.component("apply", {
+      data() {
+        return {
+          a: ""
+        }
+      },
+      template:
+        `
+        <div>
+        <textarea name="t2" id="t2" cols="30" rows="10" v-model="a" style="margin:25px 0px;"></textarea>
+        <button style="display:block">submit</button>
+        <p>textarea輸入的內容（可以呈現換行）：</p>
+        <pre>{{a}}</pre>
+        </div>
+        `
+    })
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        content: "lesson",
+      }
+    })
+  </script>
+</body>
+
+</html>
