@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+  <h2>.sync</h2>
+  <!-- 先做三個button,一個外層的button用來等內層資料傳上來做alert的,一個button是內層用來click+1的,一個button是用來emit發射資料用的 -->
+  <button @click="all">alert內層傳上來的資料</button>
+  {{count}}
+  <my-inner :count1.sync="count"></my-inner>
+</div>
+  <script>
+    Vue.component("my-inner",{
+      props:["count1"],
+      data(){
+        return{
+          count2: this.count1,
+        }
+      },
+      methods:{
+        emit2(){
+          this.$emit("update:count1",this.count2);
+          console.log(this.count2);
+        }
+      },
+      template:
+      `
+      <div>
+      <button @click="count2+=10">+10</button>
+      <button @click="emit2">emit</button>
+      </div>
+      `
+    })
+  const vm =new Vue({
+    el:"#app",
+    data:{
+      count:10,
+      },
+    methods:{
+      all(){
+        alert(this.count)
+      }
+    }
+  })
+  </script>
+</body>
+</html>

@@ -18,12 +18,12 @@
   <!-- @event="methods 內的function內的content" -->
   <button @click="add">+1</button>
   <my-count :count2="count"></my-count>
-  <h2>做兩個count ,一個count在外層,一個count在內層,只希望內層的count在最一開始的植根外層一樣,外層修改不會影響到內層 </h2>
+  <h2>做兩個count ,一個count在外層,一個count在內層,只希望內層的count在最一開始的值跟外層一樣,外層修改不會影響到內層 </h2>
   <p>因為內層的component有另外的data,所以只有使用外層最一開始傳進來的第一個值呈現於browser,第二次開始的值就會使用內層裡面的data</p>
   <p>{{count3}}</p>
   <button @click="add2">+5</button>
   <my-counter :count4="count3"></my-counter>
-  <h2>做兩個count ,一個外層的count（外面的count是1倍的）,一個室內層的count(內層的count是2倍)</h2>
+  <h2>做兩個count ,一個外層的count（外面的count是1倍的）,一個是內層的count(內層的count是2倍)</h2>
   <p>{{count5}}</p>
   <button @click="count5+=1">+1</button>
   <my-dbcount :dbcount="count5"></my-dbcount>
